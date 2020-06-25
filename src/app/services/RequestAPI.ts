@@ -1,11 +1,15 @@
-import {Injectable, isDevMode} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
+// @ts-ignore
+import { Injectable } from "@angular/core";
+// @ts-ignore
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+// @ts-ignore
+import { Observable } from "rxjs";
+// @ts-ignore
+import { environment } from "../environments/environment";
 
-
+// @ts-ignore
 @Injectable({
-    providedIn: 'root'
+    providedIn: "root"
 })
 export class RequestAPI {
     private ambiente: string;
@@ -15,14 +19,8 @@ export class RequestAPI {
         this.ambiente = environment.URL_API;
     }
 
-    private getHeader(): HttpHeaders {
-        return new HttpHeaders({
-            Authorization:  'Token ' + environment.API_TOKEN
-        });
-    }
-
-    public getBody(form: any) {
-        return new Promise(resolve => {
+    getBody(form: any) {
+        return new Promise((resolve) => {
             const body: FormData = new FormData();
             // tslint:disable-next-line:forin
             for (const key in form) {
@@ -38,16 +36,16 @@ export class RequestAPI {
      * url recebe função a ser chamada na API
      * dados recebe uma string
      */
-    public post(url: string, form: any, isPrivate = true): Observable<any> {
+    post(url: string, form: any, isPrivate = true): Observable<any> {
         let headerRequest: any;
         if (isPrivate) {
             headerRequest = {
-                headers: this.getHeader(),
+                headers: this.getHeader()
             };
         } else {
-            headerRequest = { };
+            headerRequest = {};
         }
-        console.log(headerRequest);
+
         return this.http.post(
             this.ambiente + url,
             form,
@@ -56,7 +54,7 @@ export class RequestAPI {
 
     }
 
-    public put(url: string, dados) {
+    put(url: string, dados) {
 
         return this.http.put(
             this.ambiente + url,
@@ -69,7 +67,7 @@ export class RequestAPI {
      * url recebe função a ser chamada na API
      * filtro valor que será filtrado na API
      */
-    public get(url: string, dados = {}, prv = true) {
+    get(url: string, dados = {}, prv = true) {
         if (prv) {
             return this.http.get(
                 this.ambiente + url,
@@ -94,11 +92,11 @@ export class RequestAPI {
      * url recebe função a ser chamada na API
      * filtro valor que será filtrado na API
      */
-    public delete(url: string, dados = {}) {
+    delete(url: string, dados = {}) {
         return this.http.delete(
-            this.ambiente + url ,
+            this.ambiente + url,
             {
-                params: dados,
+                params: dados
             }
         );
     }
@@ -108,18 +106,24 @@ export class RequestAPI {
      * url recebe função a ser chamada na API
      * filtro valor que será filtrado na API
      */
-    public async getPromise(url: string, dados = {}) {
+    async getPromise(url: string, dados = {}) {
         return this.http
             .get(this.ambiente + url, {
                 params: dados
             })
             .toPromise()
-            .then(resposta => {
+            .then((resposta: any) => {
                 return resposta;
             })
-            .catch(erro => {
+            .catch((erro) => {
                 console.log(erro);
             });
+    }
+
+    private getHeader(): HttpHeaders {
+        return new HttpHeaders({
+            Authorization: "Token " + environment.API_TOKEN
+        });
     }
 
 }
