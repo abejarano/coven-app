@@ -15,7 +15,6 @@ export class RequestAPI {
     private ambiente: string;
 
     constructor(private http: HttpClient) {
-        console.log(environment.URL_API);
         this.ambiente = environment.URL_API;
     }
 

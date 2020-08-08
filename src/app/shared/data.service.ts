@@ -14,7 +14,7 @@ export class DataService {
     private items = new Array<DataItem>(
         {
             id: 1,
-            name: "Item 1",
+            name: "Item XXXXXXX",
             description: "Description for Item 1"
         },
         {
