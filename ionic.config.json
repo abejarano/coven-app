@@ -1,7 +1,0 @@
-{
-  "name": "covenApp",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
